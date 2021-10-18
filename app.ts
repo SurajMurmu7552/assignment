@@ -1,34 +1,38 @@
 //enter your data here
 
 const D: { [key: string]: number } = {
-  "2021-01-01": 42,
-  "2022-01-02": 41,
-  "2021-01-03": 16,
-  "2020-07-04": 38,
   "2010-01-05": 28,
-  "2019-06-06": -16,
-  "2020-02-07": 20,
-  "2024-03-08": -12,
   "2011-01-05": 28,
   "2016-06-06": -16,
-  "2023-02-07": 20,
+  "2019-06-06": -16,
+  "2020-02-07": 0,
+  "2020-07-04": 38,
+  "2021-01-01": 42,
+  "2021-01-03": 16,
+  "2022-01-02": 41,
+  "2023-02-07": 0,
+  "2024-03-08": -12,
   "2029-03-08": -12,
 };
 
 console.log("Input--D = ", D);
 
-function solve(temp: {}, l: number, r: number): number {
+function solve(temp: {}, l: number, r: number, iteration: number): number {
   if (r >= 7) {
     r = 0;
   }
 
   if (!temp.hasOwnProperty(r)) {
-    const x: number = (temp[`${l}`] + solve(temp, l, r + 1)) / 2;
+    const x: number =
+      (temp[`${l}`] + iteration * solve(temp, l, r + 1, iteration + 1)) /
+      (2 + (iteration - 1));
+    console.log(x);
 
     return Math.round(x);
   } else {
-    const y: number = (temp[`${l}`] + 2 * temp[`${r}`]) / 3;
-
+    const y: number =
+      (temp[`${l}`] + iteration * temp[`${r}`]) / (2 + iteration - 1);
+    console.log(temp[`${l}`], temp[`${r}`], y, iteration);
     return Math.round(y);
   }
 }
@@ -42,13 +46,7 @@ function checkData(temp: {}): {} {
     if (!temp.hasOwnProperty(i)) {
       //solve equation
 
-      if (temp.hasOwnProperty(i - 1) && temp.hasOwnProperty(i + 1)) {
-        let l = i - 1;
-        let r = i + 1 >= 7 ? 0 : i + 1;
-        temp[`${i}`] = Math.round((temp[`${l}`] + temp[`${r}`]) / 2);
-      } else {
-        temp[`${i}`] = solve(temp, i - 1, i + 1);
-      }
+      temp[`${i}`] = solve(temp, i - 1, i + 1, 1);
     }
 
     switch (i) {
