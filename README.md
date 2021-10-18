@@ -1,6 +1,7 @@
 ## Assignment
 
-
+- It uses Math.round() to parse float to Int
+- For x(float) if fractional portion is 0.5 or greater it return (x+1) or else x.
 
 ### Unit tests
 
