@@ -3,7 +3,7 @@
 - It uses Math.round() to parse float to Int
 - For x(float) if fractional portion is 0.5 or greater it return (x+1) or else x.
 
-### Unit tests
+### examples
 
     Input--D = {2020-01-05: 14, 2020-01-06: 2}
     Output--D ={Fri: 10 ,Mon: 2 ,Sat: 12 ,Sun: 14 ,Thu: 8 ,Tue: 4 ,Wed: 6}
